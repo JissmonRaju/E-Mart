@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+    <h5 class="card-header">Product Details</h5>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Options</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in cont %}
+                <tr>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.Message}}</td>
+                    <td>
+                        <a href="{% url 'DeleteContact' cont_id=i.id %}" class="btn btn-danger" >Delete</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-xl">
+    <div class="card mb-10">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Edit Product Details</h5>
+
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'UpdateProduct' p_id=prod.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <select class="form-control" name="pcname">
+                        <option>{{prod.PC_Name}}</option>
+                        {% for i in cate %}
+                        <option>{{i.C_Name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <input type="text" class="form-control" value="{{prod.P_Name}}" name="pname" placeholder="Product Name">
+                </div>
+                <div class="mb-3">
+                    <input type="number" class="form-control" name="pquant" value="{{prod.P_Quant}}" placeholder="Quantity Of The Product">
+                </div>
+                <div class="mb-3">
+                    <input type="number" class="form-control" name="pprice" value="{{prod.P_Price}}" placeholder="Product Price">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" name="pdesc" placeholder="Product Description">{{prod.P_Desc}}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    ,<img src="{{prod.P_Image.url}}" width="100px" height="100px"  >
+                    <input type="file" id="basic-default-phone" name="pimage" class="form-control phone-mask"
+                           placeholder="Upload Product Image">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

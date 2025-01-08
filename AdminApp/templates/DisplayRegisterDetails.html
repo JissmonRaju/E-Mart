@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+    <h5 class="card-header">Product Details</h5>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Password</th>
+                    <th>Confirm Password</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in reg %}
+                <tr>
+                    <td>{{i.User_Name}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.Mobile}}</td>
+                    <td>{{i.PassWord}}</td>
+                    <td>{{i.Confirm_Password}}</td>
+                    <td>
+                        <a href="{% url 'DeleteRegDetails' reg_id=i.id %}" class="btn btn-danger" >Delete</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}

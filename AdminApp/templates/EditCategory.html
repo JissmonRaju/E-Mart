@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-xl">
+    <div class="card mb-10">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Edit Category Details</h5>
+
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'UpdateCategory' c_id=cate.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" class="form-control" name="cname" id="basic-default-fullname" value="{{cate.C_Name}}" placeholder="Category Name">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control" name="cdesc" placeholder="Category Description">{{cate.C_Desc}}</textarea>
+                </div>
+
+                <div class="mb-3">
+                    <img src="{{cate.C_Image.url}}" width="100px" height="100px">
+                    <input type="file" id="basic-default-phone" name="cimage" class="form-control phone-mask"
+                           placeholder="Upload Image">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+{% endblock %}
