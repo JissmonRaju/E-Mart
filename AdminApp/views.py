@@ -7,7 +7,7 @@ from AdminApp.models import Category,Product
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from datetime import datetime
-from WebApp.models import Contact,Register
+from WebApp.models import Contact,Register,OrderDB,CartDB
 from django.contrib import messages
 
 
@@ -20,7 +20,8 @@ def index(req):
     return render(req,'index.html',{'category':category,'product':product,'date':date})
 
 def add_category(a):
-    return render(a,'AddCategory.html')
+    date = datetime.today()
+    return render(a,'AddCategory.html',{'date':date})
 
 def save_category(b):
     if b.method=='POST':
@@ -33,12 +34,14 @@ def save_category(b):
         return redirect(add_category)
 
 def display_category(c):
+    date = datetime.today()
     cate = Category.objects.all()
-    return render(c,'DisplayCategory.html',{'cate':cate})
+    return render(c,'DisplayCategory.html',{'cate':cate,'date':date})
 
 def edit_category(d,c_id):
+    date = datetime.today()
     cate = Category.objects.get(id=c_id)
-    return render(d,'EditCategory.html',{'cate':cate})
+    return render(d,'EditCategory.html',{'cate':cate,'date':date})
 
 def update_category(e,c_id):
     if e.method=='POST':
@@ -63,7 +66,9 @@ def del_category(f,c_id):
 
 def add_product(g):
     cate = Category.objects.all()
-    return render(g,'AddProduct.html',{'cate':cate})
+    date = datetime.today()
+
+    return render(g,'AddProduct.html',{'cate':cate,'date':date})
 
 def save_product(h):
     if h.method=='POST':
@@ -80,12 +85,16 @@ def save_product(h):
 
 def display_product(i):
     prod = Product.objects.all()
-    return render(i,'DisplayProduct.html',{'prod':prod})
+    date = datetime.today()
+
+    return render(i,'DisplayProduct.html',{'prod':prod,'date':date})
 
 def edit_product(j,p_id):
     cate = Category.objects.all()
     prod = Product.objects.get(id=p_id)
-    return render(j,'EditProduct.html',{'prod':prod,'cate':cate})
+    date = datetime.today()
+
+    return render(j,'EditProduct.html',{'prod':prod,'cate':cate,'date':date})
 
 def update_product(k,p_id):
     if k.method=='POST':
@@ -141,8 +150,10 @@ def admin_logout(request):
 
 
 def display_contact(dis):
+    date = datetime.today()
+
     cont = Contact.objects.all()
-    return render(dis,'DisplayContact.html',{'cont':cont})
+    return render(dis,'DisplayContact.html',{'cont':cont,'date':date})
 
 def del_contact(con,cont_id):
     del_cont = Contact.objects.filter(id=cont_id)
@@ -152,12 +163,37 @@ def del_contact(con,cont_id):
 
 def display_reg_details(regi):
     reg = Register.objects.all()
-    return render(regi,'DisplayRegisterDetails.html',{'reg':reg})
+    date = datetime.today()
+
+    return render(regi,'DisplayRegisterDetails.html',{'reg':reg,'date':date})
 
 def delete_reg_details(regi,reg_id):
     del_reg = Register.objects.filter(id=reg_id)
     del_reg.delete()
     messages.error(regi,'User Deleted Successfully')
     return redirect(display_reg_details)
+
+def view_orders(request):
+    date = datetime.today()
+
+    ord = OrderDB.objects.all()
+    return render(request,'ShowOrders.html',{'ord':ord,'date':date})
+
+def del_orders(request,o_id):
+    order = OrderDB.objects.filter(id=o_id)
+    order.delete()
+    return redirect(view_orders)
+
+def view_cart(request):
+    crt = CartDB.objects.all()
+    date = datetime.today()
+
+    return render(request,'CartDetails.html',{'crt':crt,'date':date})
+
+def del_cart(request,cart_id):
+    del_cart = CartDB.objects.filter(id=cart_id)
+    del_cart.delete()
+    return redirect(view_cart)
+
 
 

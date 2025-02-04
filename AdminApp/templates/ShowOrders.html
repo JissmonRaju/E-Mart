@@ -1,10 +1,55 @@
 <!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div class="card">
+    <h5 class="card-header">Order Details</h5>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Place</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                    <th>State</th>
+                    <th>Pin</th>
+                    <th>Total Price</th>
+                    <th>Message/Order Notes</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in ord %}
+                <tr>
+                    <td>{{i.Name}}</td>
+                    <td>{{i.Email}}</td>
+                    <td>{{i.Place}}</td>
+                    <td>{{i.Address}}</td>
+                    <td>{{i.Mobile}}</td>
+                    <td>{{i.State}}</td>
+                    <td>{{i.Pin}}</td>
+                    <td>{{i.Total_Price}}</td>
+                    <td>{{i.Message}}</td>
+                    <td>
+                        <a href="{% url 'DeleteOrder' o_id=i.id %}" class="btn btn-danger" >Delete</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
+{% endblock %}

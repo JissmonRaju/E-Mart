@@ -1,10 +1,52 @@
 <!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<div class="card">
+    <h5 class="card-header">Order Details</h5>
+    <div class="card-body">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Product Image</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for i in crt %}
+                <tr>
+                    <td>{{i.User_Name}}</td>
+                    <td>{{i.Product_Name}}</td>
+                    <td>{{i.Quantity}}</td>
+                    <td>{{i.Price}}</td>
+                    <td>{{i.Total}}</td>
+                    <td>
+                      <img src="{{i.Product_Image.url}}" width="40px;height:40px;">
+                    </td>
+
+                    <td>
+                        <a href="{% url 'DeleteCart' cart_id=i.id %}" class="btn btn-danger" >Delete</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
+{% endblock %}

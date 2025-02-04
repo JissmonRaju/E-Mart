@@ -28,4 +28,10 @@ urlpatterns = [
     path('UserRegDetails/',views.display_reg_details,name='UserRegDetails'),
     path('DeleteRegDetails/<int:reg_id>/',views.delete_reg_details,name='DeleteRegDetails'),
 
+    path('OrderDetails/',views.view_orders,name='OrderDetails'),
+    path('DeleteOrder/int<o_id>/',views.del_orders,name='DeleteOrder'),
+
+    path('CartDetails/',views.view_cart,name='CartDetails'),
+    path('DeleteCart/<int:cart_id>/',views.del_cart,name='DeleteCart')
+
 ]

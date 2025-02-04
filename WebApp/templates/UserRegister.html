@@ -468,6 +468,9 @@ setTimeout(() => {
             else if(d==" "){
             	alert("Password Can't Be Blank")
             }
+            else if(d.length <8 ){
+            	alert("Password Must Be atleast of 8 characters")
+            }
             else if(d != e){
             	alert("Password Doesn't Match")
             }
@@ -477,6 +480,38 @@ setTimeout(() => {
 
         }
     </script>
+
+{% if messages %}
+
+    {% for i in messages %}
+
+        {% if i.tags == 'success' %}
+            <script>
+                swal('{{i}}', '' , 'success')
+            </script>
+
+        {% elif i.tags == 'error' %}
+            <script>
+                swal('{{i}}', '' , 'error')
+            </script>
+
+        {% elif i.tags == 'warning' %}
+            <script>
+                swal('{{i}}', '' , 'warning')
+            </script>
+
+        {% else %}
+            <script>
+                swal('{{i}}', '' , 'info')
+            </script>
+        {% endif %}
+
+    {% endfor %}
+
+{% endif %}
+
+
+
 
 
 </body>

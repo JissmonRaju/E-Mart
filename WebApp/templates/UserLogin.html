@@ -17,7 +17,7 @@
 			<div class="col align-items-center flex-col sign-in">
 				<div class="form-wrapper align-items-center">
 					<div class="form sign-in">
-						<form method="post" action="{% url 'UserLogin' %}" name="myform" onsubmit="myfunction()">
+						<form method="post" action="{% url 'UserLogin' %}" name="newform" onsubmit="newfunct()">
 							{% csrf_token %}
 							<div class="input-group">
 							<i class='bx bxs-user'></i>
@@ -442,6 +442,7 @@ toggle = () => {
 setTimeout(() => {
 	container.classList.add('sign-in')
 }, 200)
+
 </script>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -476,16 +477,17 @@ setTimeout(() => {
 {% endif %}
 
 <script>
-	function myfunction(){
-    	a = document.myform.uname.value;
-		b = document.myform.pass.value;
-		if (a==" " || a==null){
-                alert("Username Can't be Blank !!")
-            }
-		else if(b ==" "){
-            	alert("Password Can't Be Blank")
-            }
-		else {
+	function newfunct(){
+		a=document.newform.uname.value;
+		b=document.newform.pass.value;
+
+		if(a==""){
+			alert("username can't be blank")
+		}
+		else if(b==""){
+			alert("Password Can't be Blank")
+			}
+		else{
 			return true;
 		}
 	}
